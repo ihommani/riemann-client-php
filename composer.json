@@ -1,0 +1,16 @@
+{
+  "name": "trademachines/riemann-client-php",
+  "description": "PHP Client for riemann",
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "php": ">=5.4",
+    "centraldesktop/protobuf-php": "~0.6.9"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "@stable"
+  },
+  "autoload": {
+    "psr-4": { "Trademachines\\Riemann\\": "src/" }
+  }
+}
