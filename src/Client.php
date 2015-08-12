@@ -20,7 +20,10 @@ class Client
     protected $events = [];
 
     /** @var int **/
-    protected $flushAfter = 20;
+    protected $flushAfter = 50;
+
+    /** @var bool */
+    protected $active = true;
 
     /**
      * @param TransportInterface $socket
@@ -44,6 +47,14 @@ class Client
     public function setFlushAfter($flushAfter)
     {
         $this->flushAfter = $flushAfter;
+    }
+
+    /**
+     * @param boolean $active
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
     }
 
     /**
@@ -75,10 +86,12 @@ class Client
     public function flush()
     {
         if (count($this->events)) {
-            $message = new Message();
-            $message->events = $this->events;
+            if ($this->active) {
+                $message = new Message();
+                $message->events = $this->events;
 
-            $this->socket->write($message->serialize());
+                $this->socket->write($message->serialize());
+            }
 
             $this->events = [];
         }

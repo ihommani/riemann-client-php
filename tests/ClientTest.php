@@ -58,6 +58,16 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->client->sendEvent();
     }
 
+    public function testSocketWriteNotCalledIfActiveIsFalse()
+    {
+        $socketMock = $this->getSocketMock(0);
+
+        $this->client = new Client($socketMock);
+        $this->client->setActive(false);
+        $this->client->sendEvent();
+        $this->client->flush();
+    }
+
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
