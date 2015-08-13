@@ -9,8 +9,11 @@ class UdpSocket implements TransportInterface
     /** @var string */
     protected $host;
 
-    /** int @var */
+    /** @var int */
     protected $port;
+
+    /** @var resource */
+    protected $socket;
 
     /**
      * @param $host
@@ -18,8 +21,24 @@ class UdpSocket implements TransportInterface
      */
     public function __construct($host, $port)
     {
-        $this->host = $host;
-        $this->port = $port;
+        $remoteSocket = sprintf('udp://%s:%s', $host, $port);
+        $this->socket = @stream_socket_client($remoteSocket, $errno, $errorMessage);
+
+        if ($this->socket == false) {
+            throw new \UnexpectedValueException(sprintf('Socket not created!: %s', $errorMessage));
+        }
+
+        stream_set_blocking($this->socket, 0);
+    }
+
+    /**
+     * Close the socket
+     */
+    public function close()
+    {
+        if (is_resource($this->socket)) {
+            fclose($this->socket);
+        }
     }
 
     /**
@@ -27,16 +46,10 @@ class UdpSocket implements TransportInterface
      */
     public function write($data)
     {
-        $remoteSocket = sprintf('udp://%s:%s', $this->host, $this->port);
-        $stream = stream_socket_client($remoteSocket, $errno, $errorMessage);
-
-        if ($stream == false) {
-            throw new \UnexpectedValueException('Unable to connect!');
+        if (!is_resource($this->socket)) {
+            throw new \LogicException('The socket is closed!');
         }
 
-        stream_set_blocking($stream, 0);
-
-        fwrite($stream, $data);
-        fclose($stream);
+        fwrite($this->socket, $data);
     }
 }
