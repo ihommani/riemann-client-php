@@ -9,7 +9,7 @@ $client = new Client($socket);
 $client->sendEvent([
     'host' => 'tm',
     'service' => 'loader',
-    'metric' => 1
+    'metrics' => 1
 ]);
 
 // By default the data will be really send to riemann once 20 events have been queued
@@ -20,3 +20,7 @@ $client->flush();
 $client->setFlushAfter(5);
 
 ```
+
+## TODO
+ * TCP Transport
+ * UDP Packet size control
