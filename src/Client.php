@@ -20,7 +20,7 @@ class Client
     protected $events = [];
 
     /** @var int **/
-    protected $flushAfter = 50;
+    protected $flushAfter = 20;
 
     /** @var bool */
     protected $active = true;
