@@ -47,9 +47,9 @@ class UdpSocket implements TransportInterface
     public function write($data)
     {
         if (!is_resource($this->socket)) {
-            throw new \LogicException('The socket is closed!');
+            return false;
         }
 
-        fwrite($this->socket, $data);
+        return fwrite($this->socket, $data);
     }
 }

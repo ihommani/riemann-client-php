@@ -82,18 +82,24 @@ class Client
 
     /**
      * Flush the event queues and send the data
+     *
+     * @return int|bool
      */
     public function flush()
     {
+        $res = true;
+
         if (count($this->events)) {
             if ($this->active) {
                 $message = new Message();
                 $message->events = $this->events;
 
-                $this->socket->write($message->serialize());
+                $res = $this->socket->write($message->serialize());
             }
 
             $this->events = [];
         }
+
+        return $res;
     }
 }

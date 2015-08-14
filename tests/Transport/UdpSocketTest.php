@@ -5,14 +5,11 @@ use \Trademachines\Riemann\Transport\UdpSocket;
 
 class UdpSocketTest extends PHPUnit_Framework_TestCase
 {
-    /**
-     * @expectedException LogicException
-     */
-    public function testWriteIfSocketNotOpenRaiseException()
+    public function testWriteIfSocketClosedReturnFalse()
     {
         $socket = new UdpSocket('localhost', 0);
         $socket->close();
-        $socket->write('something');
+        $this->assertEquals(false, $socket->write('something'));
     }
 
     /**
