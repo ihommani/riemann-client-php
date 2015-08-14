@@ -1,5 +1,7 @@
 # riemann-client-php
 
+[![Build Status](https://travis-ci.org/trademachines/riemann-client-php.svg)](https://travis-ci.org/trademachines/riemann-client-php)
+
 ## Usage
 
 ```php
