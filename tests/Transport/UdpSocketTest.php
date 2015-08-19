@@ -12,11 +12,21 @@ class UdpSocketTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(false, $socket->write('something'));
     }
 
-    /**
-     * @expectedException UnexpectedValueException
-     */
     public function testCreationFailedRaiseException()
     {
         new UdpSocket('43', -5);
+    }
+
+    public function testIsOpen()
+    {
+        $socket = new UdpSocket('localhost', 0);
+        $this->assertEquals($socket->isOpen(), true);
+    }
+
+    public function testIsOpenIfSocketClosedReturnFalse()
+    {
+        $socket = new UdpSocket('localhost', 0);
+        $socket->close();
+        $this->assertEquals($socket->isOpen(), false);
     }
 }

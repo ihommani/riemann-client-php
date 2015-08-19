@@ -16,6 +16,8 @@ class UdpSocket implements TransportInterface
     protected $socket;
 
     /**
+     * If the socket is not created, no exception is raised.
+     *
      * @param $host
      * @param $port
      */
@@ -24,11 +26,17 @@ class UdpSocket implements TransportInterface
         $remoteSocket = sprintf('udp://%s:%s', $host, $port);
         $this->socket = @stream_socket_client($remoteSocket, $errno, $errorMessage);
 
-        if ($this->socket == false) {
-            throw new \UnexpectedValueException(sprintf('Socket not created!: %s', $errorMessage));
+        if ($this->socket) {
+            stream_set_blocking($this->socket, 0);
         }
+    }
 
-        stream_set_blocking($this->socket, 0);
+    /**
+     * @return bool
+     */
+    public function isOpen()
+    {
+        return is_resource($this->socket);
     }
 
     /**
@@ -36,7 +44,7 @@ class UdpSocket implements TransportInterface
      */
     public function close()
     {
-        if (is_resource($this->socket)) {
+        if ($this->isOpen()) {
             fclose($this->socket);
         }
     }
@@ -46,7 +54,7 @@ class UdpSocket implements TransportInterface
      */
     public function write($data)
     {
-        if (!is_resource($this->socket)) {
+        if (!$this->isOpen()) {
             return false;
         }
 
