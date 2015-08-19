@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/trademachines/riemann-client-php.svg)](https://travis-ci.org/trademachines/riemann-client-php)
 
+Simple PHP client for [Riemann](http://riemann.io/) 
+
 ## Usage
 
 ```php
@@ -21,6 +23,21 @@ $client->flush();
 // Or by changing the threshold:
 $client->setFlushAfter(5);
 
+```
+
+
+## Installation
+
+### Composer
+
+You can install this package with [composer](https://getcomposer.org/), simply add "trademachines/riemann-client-php" to your composer.json file.
+
+```javascript
+{
+    "require": {
+        "trademachines/riemann-client-php": "dev-master"
+    }
+}
 ```
 
 ## TODO
