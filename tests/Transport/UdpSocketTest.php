@@ -12,7 +12,7 @@ class UdpSocketTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(false, $socket->write('something'));
     }
 
-    public function testCreationFailedRaiseException()
+    public function testCreationFailedDoNotRaiseException()
     {
         new UdpSocket('43', -5);
     }
