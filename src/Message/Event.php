@@ -30,7 +30,7 @@ class Event extends AnnotatedMessage
     /** @protobuf(tag=8, type=float, optional) */
     public $ttl;
 
-    /** @protobuf(tag=9, type=message, reference=Riemann\Attribute, repeated) */
+    /** @protobuf(tag=9, type=message, reference=Trademachines\Message\Attribute, repeated) */
     public $attributes;
 
     /** @protobuf(tag=13, type=sint64, optional) */
