@@ -14,12 +14,4 @@ class Attribute extends AnnotatedMessage
 
     /** @protobuf(tag=2, type=string, optional) */
     public $value;
-
-    public static function create($key, $value)
-    {
-        $attribute = new Attribute();
-        $attribute->key = $key;
-        $attribute->value = $value;
-        return $attribute;
-    }
 }
