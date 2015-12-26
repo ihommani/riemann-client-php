@@ -3,6 +3,7 @@
 namespace Trademachines\Riemann;
 
 use DrSlump\Protobuf;
+use DrSlump\Protobuf\Codec\PhpArray;
 use Trademachines\Riemann\Message\Event;
 use Trademachines\Riemann\Message\Message;
 use Trademachines\Riemann\Transport\TransportInterface;
@@ -31,6 +32,7 @@ class Client
     public function __construct(TransportInterface $socket)
     {
         $this->socket = $socket;
+        $this->codec = new PhpArray();
     }
 
     /**
@@ -75,7 +77,7 @@ class Client
     public function sendEvent(array $eventData = [])
     {
         $event = new Event();
-        $event->fill($eventData);
+        $event->parse($eventData, $this->codec);
 
         $this->send($event);
     }
