@@ -12,7 +12,7 @@ trait RiemannAwareTrait
     /**
      * @param Client $riemannClient
      */
-    public function setClient(Client $riemannClient)
+    public function setRiemannClient(Client $riemannClient)
     {
         $this->riemannClient = $riemannClient;
     }
