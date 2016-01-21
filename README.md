@@ -13,7 +13,10 @@ $client = new Client($socket);
 $client->sendEvent([
     'host' => 'tm',
     'service' => 'loader',
-    'metrics' => 1
+    'metrics' => 1,
+    'attributes' => [
+        [ 'key' => 'source', 'value' => 'my source'],
+    ]
 ]);
 
 // By default the data will be really send to riemann once 20 events have been queued

@@ -3,6 +3,7 @@
 namespace Trademachines\Riemann\Message;
 
 use DrSlump\Protobuf\AnnotatedMessage;
+use DrSlump\Protobuf\CodecInterface;
 
 /**
  * Class Event
@@ -53,22 +54,17 @@ class Event extends AnnotatedMessage
     }
 
     /**
-     * Fill the event with the specified array values
-     *
-     * @param array $data
+     * {@inheritdoc}
      */
-    public function fill(array $data)
+    public function parse($data, CodecInterface $codec = null)
     {
         if (!empty($data['metrics'])) {
             $this->setMetrics($data['metrics']);
         }
 
-        foreach ($data as $name => $value) {
-            if (property_exists($this, $name)) {
-                $this->{$name} = $value;
-            }
-        }
+        parent::parse($data, $codec);
     }
+
 
     /**
      * @param int|float $metrics
