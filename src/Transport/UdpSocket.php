@@ -58,6 +58,6 @@ class UdpSocket implements TransportInterface
             return false;
         }
 
-        return fwrite($this->socket, $data);
+        return @fwrite($this->socket, $data);
     }
 }
