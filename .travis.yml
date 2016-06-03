@@ -8,4 +8,4 @@ php:
 before_install:
   - composer install
 script:
-  - php vendor/bin/phpunit
+  - ./vendor/bin/phpunit -v --coverage-text

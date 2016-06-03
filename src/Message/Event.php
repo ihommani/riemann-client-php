@@ -65,7 +65,6 @@ class Event extends AnnotatedMessage
         parent::parse($data, $codec);
     }
 
-
     /**
      * @param int|float $metrics
      */
