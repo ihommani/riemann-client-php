@@ -58,7 +58,7 @@ class Event extends AnnotatedMessage
      */
     public function parse($data, CodecInterface $codec = null)
     {
-        if (!empty($data['metrics'])) {
+        if (isset($data['metrics'])) {
             $this->setMetrics($data['metrics']);
         }
 
