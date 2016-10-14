@@ -8,6 +8,8 @@ Simple PHP client for [Riemann](http://riemann.io/)
 
 ```php
 $socket = new UdpSocket('127.0.0.1', 5555);
+// To use a tcp socket:
+// $socket = new TcpSocket('127.0.0.1', 5555);
 
 $client = new Client($socket);
 $client->sendEvent([
@@ -44,5 +46,4 @@ You can install this package with [composer](https://getcomposer.org/), simply a
 ```
 
 ## TODO
- * TCP Transport
  * UDP Packet size control
